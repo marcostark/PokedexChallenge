@@ -61,7 +61,7 @@ class PokemonAdapter(private val interaction: Iteraction? = null) :
     ) : RecyclerView.ViewHolder(itemView) {
 
      fun bind(item: Pokemon) = with( itemView) {
-         itemView.text_name_pokemon.text = item.name
+         itemView.text_name_pokemon.text = item.name.capitalize()
          Glide.with(itemView.context)
              .load(item.getImageUrl())
              .into(itemView.image_pokemon)
