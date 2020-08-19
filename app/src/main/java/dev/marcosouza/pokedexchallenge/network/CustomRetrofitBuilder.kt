@@ -1,4 +1,4 @@
-package dev.marcosouza.pokedexchallenge.api
+package dev.marcosouza.pokedexchallenge.network
 
 import dev.marcosouza.pokedexchallenge.util.LiveDataCallAdapterFactory
 import retrofit2.Retrofit
