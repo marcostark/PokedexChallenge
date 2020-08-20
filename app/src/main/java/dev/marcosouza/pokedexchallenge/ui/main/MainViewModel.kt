@@ -15,6 +15,7 @@ class MainViewModel : ViewModel() {
 
     private val _stateEvent: MutableLiveData<MainStateEvent> = MutableLiveData()
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
+    private var _currentPage: Int = 0;
 
     val viewState: LiveData<MainViewState>
         get() = _viewState
@@ -28,7 +29,7 @@ class MainViewModel : ViewModel() {
         return when(stateEvent) {
 
             is MainStateEvent.GetPokemonsEvent -> {
-                PokemonRepository.getAllPokemons()
+                PokemonRepository.getAllPokemons(_currentPage)
             }
 
             is MainStateEvent.None -> {
@@ -54,4 +55,23 @@ class MainViewModel : ViewModel() {
     fun setStateEvent(event: MainStateEvent){
         _stateEvent.value = event
     }
+
+//    fun setCurrentPage(currentPage: Int){
+//        _currentPage = currentPage
+//    }
+
+    fun nextPage() {
+        incrementPageNumber()
+        println("DEBUG: BlogFragment: attempting to load next page...")
+        setStateEvent(MainStateEvent.GetPokemonsEvent())
+    }
+
+    private fun incrementPageNumber(){
+        _currentPage++
+    }
+
+
+//    fun loadPokemons() {
+//        PokemonRepository.getAllPokemons(page)
+//    }
 }
