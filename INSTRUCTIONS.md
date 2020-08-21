@@ -23,9 +23,9 @@ Tela inicial com lista com todos os Pokémons
     -   Busca por ID ou Nome utilizando o Search Dialog
     [x] Paginação utilizando Endless Scrolling
     [x] Foto default do Pokémon na listagem
-    -   Tela com os detalhes do Pokémon ○ Nome e ID;
+    [X] Tela com os detalhes do Pokémon ○ Nome e ID;
     -   Carrossel com as fotos disponíveis do Pokémon
-    -   View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
+    [X] View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
     -   Exibir suas Habilidades (Run Away, Adaptability, Synchronize etc);
     -   Ao tocar em uma habilidade, exibir um modal com a descrição;
     -   Exibir seus tipos (electric, ground, water, fire etc);

@@ -1,24 +1,26 @@
 package dev.marcosouza.pokedexchallenge.ui.main.fragments.details
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import dev.marcosouza.pokedexchallenge.R
-import dev.marcosouza.pokedexchallenge.model.Pokemon
 import dev.marcosouza.pokedexchallenge.model.PokemonDetails
-import dev.marcosouza.pokedexchallenge.ui.adapter.PokemonAdapter
 import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
 import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
+import dev.marcosouza.pokedexchallenge.util.PokemonTypesUtils
 import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.pokemon_list_item.view.*
+
 
 class DetailsFragment : Fragment() {
 
@@ -68,13 +70,31 @@ class DetailsFragment : Fragment() {
 
         val id = pokemon.id
         val stats = pokemon.stats
+        val types = pokemon.types
+        val abilities = pokemon.abilities
+
+        // Tipos do pokemon
+        val color: Int = PokemonTypesUtils.getColorByType(types[0].type.name)
+        val colorType = PokemonTypesUtils.getColor(color, resources)
+        header.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
 
         text_detail_name_pokemon.text = pokemon.name.capitalize()
         text_detail_id_pokemon.text = "#" + id
 
-        val hp = stats[0]
+        text_types.text = types[0].type.name.capitalize()
+        text_types.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
+
+        // Habilidades
+        text_abilities.text = abilities[0].ability.name.capitalize()
+        text_abilities.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
+
+        // Informações básicas do pokemon
+        text_national_id.text = pokemon.id
+        text_height.text = pokemon.height.toString()
+        text_weight.text = pokemon.weight.toString()
+
+        // Estatisticas basicas do pokemon
         text_hp.text = stats[0].baseStat
-        println("DEBUG $hp")
         text_atk.text = stats[1].baseStat
         text_def.text = stats[2].baseStat
         text_satk.text = stats[3].baseStat

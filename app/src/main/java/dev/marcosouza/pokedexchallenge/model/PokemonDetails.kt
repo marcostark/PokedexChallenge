@@ -30,7 +30,7 @@ class PokemonDetails(
 
     @Expose
     @SerializedName("abilities")
-    val abilities: List<Ability>,
+    val abilities: List<Abilities>,
 
     @Expose
     @SerializedName("types")
@@ -75,6 +75,15 @@ class PokemonDetails(
 }
 
 @Parcelize
+class Abilities(
+
+    @Expose
+    @SerializedName("ability")
+    val ability: Ability
+
+) : Parcelable { }
+
+@Parcelize
 class Ability(
 
     @Expose
@@ -93,8 +102,22 @@ class Ability(
     }
 }
 
+
 @Parcelize
 class Types(
+
+    @Expose
+    @SerializedName("slot")
+    val slot: String,
+
+    @Expose
+    @SerializedName("type")
+    val type: Type
+
+) : Parcelable { }
+
+@Parcelize
+class Type(
 
     @Expose
     @SerializedName("name")
