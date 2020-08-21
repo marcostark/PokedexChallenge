@@ -20,6 +20,7 @@ class MainViewModel : ViewModel() {
     private var _currentPage: Int = 0;
 
     private var _selectedPokemon = MutableLiveData<Pokemon>()
+    private var _query = MutableLiveData<String>()
 
     fun setPokemon(pokemon: Pokemon) {
         _selectedPokemon.value =  pokemon
@@ -42,6 +43,10 @@ class MainViewModel : ViewModel() {
 
             is MainStateEvent.GetPokemonDetails -> {
                 PokemonRepository.getPokemon(_selectedPokemon.value!!.name);
+            }
+
+            is MainStateEvent.GetSearchPokemon -> {
+                PokemonRepository.getSearchPokemon(_query.value.toString());
             }
 
             is MainStateEvent.None -> {
@@ -74,10 +79,6 @@ class MainViewModel : ViewModel() {
         _stateEvent.value = event
     }
 
-//    fun setCurrentPage(currentPage: Int){
-//        _currentPage = currentPage
-//    }
-
     fun nextPage() {
         incrementPageNumber()
         println("DEBUG: BlogFragment: attempting to load next page...")
@@ -86,6 +87,10 @@ class MainViewModel : ViewModel() {
 
     private fun incrementPageNumber(){
         _currentPage++
+    }
+
+    fun setQuery(query: String){
+        _query.value = query
     }
 
 

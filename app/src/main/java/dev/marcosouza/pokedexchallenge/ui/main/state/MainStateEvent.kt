@@ -6,6 +6,8 @@ sealed class MainStateEvent {
 
     class GetPokemonDetails: MainStateEvent()
 
+    class GetSearchPokemon: MainStateEvent()
+
     class None: MainStateEvent()
 
 }

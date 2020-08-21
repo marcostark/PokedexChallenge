@@ -1,13 +1,12 @@
 package dev.marcosouza.pokedexchallenge.ui.main.fragments.details
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +41,14 @@ class DetailsFragment : Fragment() {
     -   Exibir spinner (combobox) que permita selecionar as variações do Pokémon (ao selecionar uma variação, o app deve carregar automaticamente os dados da variação selecionada);
     * */
 
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                activity?.onBackPressed()
+//            }
+//        })
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -136,4 +143,5 @@ class DetailsFragment : Fragment() {
             println("DEBUG: $context must implement DataStateListener")
         }
     }
+
 }

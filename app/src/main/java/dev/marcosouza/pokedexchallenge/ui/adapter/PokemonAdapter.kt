@@ -75,6 +75,11 @@ class PokemonAdapter(
         pokemonsList.addAll(pokemons)
         notifyItemRangeInserted(initPosition, pokemonsList.size)
     }
+
+    fun clearListPokemons() {
+        pokemonsList.clear()
+        notifyDataSetChanged()
+    }
 //
 //
 //    internal inner class PokemonRecyclerChangeCallback(

@@ -14,4 +14,5 @@
     <string name="sdef">SDEF</string>
     <string name="spd">SPD</string>
     <string name="stats_value">300</string>
+    <string name="search_pokemon">Buscar Pokemon</string>
 </resources>

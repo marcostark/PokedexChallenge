@@ -1,9 +1,9 @@
 package dev.marcosouza.pokedexchallenge.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dev.marcosouza.pokedexchallenge.R
@@ -76,4 +76,20 @@ class MainActivity : AppCompatActivity(),
         viewModel.setPokemon(pokemon)
         this.showFragment(DetailsFragment())
     }
+
+//    override fun onBackPressed() {
+//        val fragmentList: List<*> = supportFragmentManager.fragments
+//        var handled = false
+//        for (f in fragmentList) {
+//            if (f is BaseFragment) {
+//                handled = (f as BaseFragment).onBackPressed()
+//                if (handled) {
+//                    break
+//                }
+//            }
+//        }
+//        if (!handled) {
+//            super.onBackPressed()
+//        }
+//    }
 }

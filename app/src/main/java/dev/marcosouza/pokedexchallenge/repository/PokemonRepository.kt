@@ -45,4 +45,19 @@ object PokemonRepository {
         }.asLiveData()
     }
 
+    fun getSearchPokemon(
+        query: String
+    ): LiveData<DataState<MainViewState>> {
+        return object: NetworkBoundResource<PokemonDetails, MainViewState>(){
+            override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonDetails>) {
+                result.value = DataState.data(data = MainViewState(
+                    pokemon = response.body
+                ))
+            }
+            override fun createCall(): LiveData<GenericApiResponse<PokemonDetails>> {
+                return CustomRetrofitBuilder.apiService.getPokemonByName(query)
+            }
+        }.asLiveData()
+    }
+
 }
