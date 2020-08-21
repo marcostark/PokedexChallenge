@@ -59,14 +59,27 @@ class DetailsFragment : Fragment() {
     }
 
     private fun updateUi(pokemon: PokemonDetails) {
-        println("DEBUG $pokemon")
 
         context?.let {
             Glide.with(it)
                 .load(pokemon.getImageUrl())
                 .into(image_detail_pokemon)
         }
-        text_detail_name_pokemon.text = pokemon.name
+
+        val id = pokemon.id
+        val stats = pokemon.stats
+
+        text_detail_name_pokemon.text = pokemon.name.capitalize()
+        text_detail_id_pokemon.text = "#" + id
+
+        val hp = stats[0]
+        text_hp.text = stats[0].baseStat
+        println("DEBUG $hp")
+        text_atk.text = stats[1].baseStat
+        text_def.text = stats[2].baseStat
+        text_satk.text = stats[3].baseStat
+        text_sdef.text = stats[4].baseStat
+        text_spd.text = stats[5].baseStat
     }
 
     private fun triggerGetPokemonDetailsEvent() {

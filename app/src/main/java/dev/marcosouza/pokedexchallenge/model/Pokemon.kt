@@ -19,7 +19,7 @@ class Pokemon(
 
     fun getImageUrl(): String {
         val id = url.split("/".toRegex()).dropLast(1).last()
-        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+        return "https://pokeres.bastionbot.org/images/pokemon/$id.png"
     }
 
     override fun toString(): String {

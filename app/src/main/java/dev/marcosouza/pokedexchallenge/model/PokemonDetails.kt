@@ -45,12 +45,11 @@ class PokemonDetails(
 
     fun getImageUrl(): String {
         val id = id
-        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+        //return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+        return "https://pokeres.bastionbot.org/images/pokemon/$id.png"
     }
 
-    override fun toString(): String {
-        return "Pokemon(name='$name', id='$id')"
-    }
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -68,6 +67,10 @@ class PokemonDetails(
         var result = id.hashCode()
         result = 31 * result + name.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return "PokemonDetails(id='$id', name='$name', weight=$weight, height=$height, order=$order, abilities=$abilities, types=$types, stats=$stats)"
     }
 }
 
@@ -124,7 +127,11 @@ class Stats(
     @SerializedName("stat")
     val stat: Stat
 
-) : Parcelable { }
+) : Parcelable {
+    override fun toString(): String {
+        return "Stats(baseStat='$baseStat', effort='$effort', stat=$stat)"
+    }
+}
 
 @Parcelize
 class Stat(
