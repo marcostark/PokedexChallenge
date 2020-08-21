@@ -7,12 +7,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dev.marcosouza.pokedexchallenge.R
+import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.ui.main.fragments.details.DetailsFragment
+import dev.marcosouza.pokedexchallenge.ui.main.fragments.main.MainFragment
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.util.DataState
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(),
-    DataStateListener {
+    DataStateListener,
+    ICallbackListener {
 
     private lateinit var viewModel: MainViewModel
 
@@ -59,5 +63,17 @@ class MainActivity : AppCompatActivity(),
 
     override fun onDataStateChange(dataState: DataState<*>?) {
         handleDataStateChange(dataState)
+    }
+
+    override fun onAttachFragment(fragment: Fragment) {
+        when(fragment) {
+            is MainFragment -> fragment.setOnPokemonDetailClickListener(this)
+        }
+    }
+
+    override fun onCallBackLaunchDetails(pokemon: Pokemon) {
+        println("DEBUG: ITEM: $pokemon")
+        viewModel.setPokemon(pokemon)
+        this.showFragment(DetailsFragment())
     }
 }

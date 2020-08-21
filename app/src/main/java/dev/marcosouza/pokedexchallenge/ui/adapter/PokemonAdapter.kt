@@ -104,6 +104,11 @@ class PokemonAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
 
      fun bind(item: Pokemon) = with( itemView) {
+
+         itemView.setOnClickListener {
+             interaction?.onItemSelected(adapterPosition, item)
+         }
+
          itemView.text_name_pokemon.text = item.name.capitalize()
          Glide.with(itemView.context)
              .load(item.getImageUrl())

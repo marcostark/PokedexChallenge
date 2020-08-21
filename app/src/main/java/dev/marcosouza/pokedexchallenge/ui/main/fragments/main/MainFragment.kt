@@ -1,4 +1,4 @@
-package dev.marcosouza.pokedexchallenge.ui.main
+package dev.marcosouza.pokedexchallenge.ui.main.fragments.main
 
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.Pokemon
 import dev.marcosouza.pokedexchallenge.ui.adapter.PokemonAdapter
+import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
+import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
 import dev.marcosouza.pokedexchallenge.util.InfiniteScrollListener
@@ -22,11 +23,11 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment(),
     PokemonAdapter.Iteraction{
 
-    lateinit var viewModel: MainViewModel
-    lateinit var dataStateListener: DataStateListener
-    lateinit var pokemonAdapter: PokemonAdapter
+    private lateinit var viewModel: MainViewModel
+    private lateinit var dataStateListener: DataStateListener
+    private lateinit var pokemonAdapter: PokemonAdapter
 
-    private var currentPage = 1
+    private lateinit var callbackListener: ICallbackListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +60,7 @@ class MainFragment : Fragment(),
        }
     }
 
-    fun loadData() {
+    private fun loadData() {
         viewModel.nextPage()
     }
 
@@ -104,6 +105,10 @@ class MainFragment : Fragment(),
     }
 
     override fun onItemSelected(position: Int, item: Pokemon) {
-        println("DEBUG: $item")
+        this.callbackListener.onCallBackLaunchDetails(item)
+    }
+
+    fun setOnPokemonDetailClickListener(OnPokemonDetailClickListener: ICallbackListener) {
+        this.callbackListener = OnPokemonDetailClickListener
     }
 }

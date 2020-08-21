@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class InfiniteScrollListener(
     val func: () -> Unit,
-    val layoutManager: GridLayoutManager) : RecyclerView.OnScrollListener() {
+    private val layoutManager: GridLayoutManager) : RecyclerView.OnScrollListener() {
 
     private var previousTotal = 0
     private var loading = true
@@ -29,7 +29,6 @@ class InfiniteScrollListener(
                 }
             }
             if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
-                // End has been reached
                 func()
                 loading = true
             }
