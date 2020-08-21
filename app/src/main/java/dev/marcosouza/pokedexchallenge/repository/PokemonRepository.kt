@@ -1,16 +1,21 @@
 package dev.marcosouza.pokedexchallenge.repository
 
 import androidx.lifecycle.LiveData
+import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.model.PokemonDetails
 import dev.marcosouza.pokedexchallenge.model.PokemonResponse
 import dev.marcosouza.pokedexchallenge.network.CustomRetrofitBuilder
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainViewState
 import dev.marcosouza.pokedexchallenge.util.ApiSuccessResponse
+import dev.marcosouza.pokedexchallenge.util.Constants
 import dev.marcosouza.pokedexchallenge.util.DataState
 import dev.marcosouza.pokedexchallenge.util.GenericApiResponse
 
 object PokemonRepository {
 
-    fun getAllPokemons(): LiveData<DataState<MainViewState>> {
+    fun getAllPokemons(
+        page: Int
+    ): LiveData<DataState<MainViewState>> {
         return object: NetworkBoundResource<PokemonResponse, MainViewState>(){
             override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonResponse>) {
                 result.value = DataState.data(data = MainViewState(
@@ -18,7 +23,24 @@ object PokemonRepository {
                     ))
             }
             override fun createCall(): LiveData<GenericApiResponse<PokemonResponse>> {
-                return CustomRetrofitBuilder.apiService.getAllPokemons()
+               return CustomRetrofitBuilder.apiService.getAllPokemons(
+                   Constants.LIMIT,
+                   page * Constants.LIMIT)
+            }
+        }.asLiveData()
+    }
+
+    fun getPokemon(
+        name: String
+    ): LiveData<DataState<MainViewState>> {
+        return object: NetworkBoundResource<PokemonDetails, MainViewState>(){
+            override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonDetails>) {
+                result.value = DataState.data(data = MainViewState(
+                    pokemon = response.body
+                ))
+            }
+            override fun createCall(): LiveData<GenericApiResponse<PokemonDetails>> {
+                return CustomRetrofitBuilder.apiService.getPokemonByName(name)
             }
         }.asLiveData()
     }

@@ -1,33 +1,33 @@
-package dev.marcosouza.pokedexchallenge.ui.main
+package dev.marcosouza.pokedexchallenge.ui.main.fragments.main
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.Pokemon
 import dev.marcosouza.pokedexchallenge.ui.adapter.PokemonAdapter
+import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
+import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
+import dev.marcosouza.pokedexchallenge.util.InfiniteScrollListener
 import dev.marcosouza.pokedexchallenge.util.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_main.*
-import java.lang.ClassCastException
-import java.lang.Exception
 
 class MainFragment : Fragment(),
     PokemonAdapter.Iteraction{
 
-    lateinit var viewModel: MainViewModel
-    lateinit var dataStateListener: DataStateListener
-    lateinit var pokemonAdapter: PokemonAdapter
+    private lateinit var viewModel: MainViewModel
+    private lateinit var dataStateListener: DataStateListener
+    private lateinit var pokemonAdapter: PokemonAdapter
 
+    private lateinit var callbackListener: ICallbackListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +53,15 @@ class MainFragment : Fragment(),
            layoutManager = GridLayoutManager(activity, 2)
            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
            addItemDecoration(topSpacingItemDecoration)
-           pokemonAdapter = PokemonAdapter(this@MainFragment)
+           pokemonAdapter = PokemonAdapter(ArrayList(), this@MainFragment)
+           addOnScrollListener(InfiniteScrollListener({loadData()}, this.layoutManager as GridLayoutManager))
            adapter = pokemonAdapter
+
        }
+    }
+
+    private fun loadData() {
+        viewModel.nextPage()
     }
 
     private fun subscribeObververs() {
@@ -75,8 +81,12 @@ class MainFragment : Fragment(),
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.pokemons?.let { pokemons ->
-                //println("DEBUG Pokemons: $pokemons")
-                pokemonAdapter.submitList(pokemons.results)
+                pokemonAdapter.updateListPokemons(pokemons.results)
+//               pokemonAdapter.apply {
+//                   submitList(
+//                       pokemons.results
+//                   )
+//               }
             }
         })
     }
@@ -95,7 +105,10 @@ class MainFragment : Fragment(),
     }
 
     override fun onItemSelected(position: Int, item: Pokemon) {
-        println("DEBUG: $item")
+        this.callbackListener.onCallBackLaunchDetails(item)
     }
 
+    fun setOnPokemonDetailClickListener(OnPokemonDetailClickListener: ICallbackListener) {
+        this.callbackListener = OnPokemonDetailClickListener
+    }
 }

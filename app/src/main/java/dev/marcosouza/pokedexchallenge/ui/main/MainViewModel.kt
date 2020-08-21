@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.model.PokemonDetails
 import dev.marcosouza.pokedexchallenge.model.PokemonResponse
 import dev.marcosouza.pokedexchallenge.repository.PokemonRepository
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
@@ -15,6 +17,13 @@ class MainViewModel : ViewModel() {
 
     private val _stateEvent: MutableLiveData<MainStateEvent> = MutableLiveData()
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
+    private var _currentPage: Int = 0;
+
+    private var _selectedPokemon = MutableLiveData<Pokemon>()
+
+    fun setPokemon(pokemon: Pokemon) {
+        _selectedPokemon.value =  pokemon
+    }
 
     val viewState: LiveData<MainViewState>
         get() = _viewState
@@ -28,7 +37,11 @@ class MainViewModel : ViewModel() {
         return when(stateEvent) {
 
             is MainStateEvent.GetPokemonsEvent -> {
-                PokemonRepository.getAllPokemons()
+                PokemonRepository.getAllPokemons(_currentPage)
+            }
+
+            is MainStateEvent.GetPokemonDetails -> {
+                PokemonRepository.getPokemon(_selectedPokemon.value!!.name);
             }
 
             is MainStateEvent.None -> {
@@ -44,6 +57,12 @@ class MainViewModel : ViewModel() {
         _viewState.value = update
     }
 
+    fun setPokemonDetailData(details: PokemonDetails){
+        val update = getCurrentViewStateOrNew()
+        update.pokemon = details
+        _viewState.value = update
+    }
+
     private fun getCurrentViewStateOrNew(): MainViewState {
         val value = viewState.value?.let {
             it
@@ -54,4 +73,23 @@ class MainViewModel : ViewModel() {
     fun setStateEvent(event: MainStateEvent){
         _stateEvent.value = event
     }
+
+//    fun setCurrentPage(currentPage: Int){
+//        _currentPage = currentPage
+//    }
+
+    fun nextPage() {
+        incrementPageNumber()
+        println("DEBUG: BlogFragment: attempting to load next page...")
+        setStateEvent(MainStateEvent.GetPokemonsEvent())
+    }
+
+    private fun incrementPageNumber(){
+        _currentPage++
+    }
+
+
+//    fun loadPokemons() {
+//        PokemonRepository.getAllPokemons(page)
+//    }
 }

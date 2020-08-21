@@ -1,14 +1,11 @@
 package dev.marcosouza.pokedexchallenge.repository
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import dev.marcosouza.pokedexchallenge.util.*
-import dev.marcosouza.pokedexchallenge.util.Constants.Companion.TESTING_NETWORK_DELAY
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -20,7 +17,6 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType>{
         result.value = DataState.loading(true)
 
         GlobalScope.launch(IO) {
-            delay(TESTING_NETWORK_DELAY)
             withContext(Main){
                 val apiResponse = createCall()
                 result.addSource(apiResponse){response ->
