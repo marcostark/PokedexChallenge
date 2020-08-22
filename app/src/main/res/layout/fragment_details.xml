@@ -75,7 +75,7 @@
             android:text="001"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_types" />
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_types" />
 
         <View
             android:id="@+id/view_separator_left"
@@ -97,7 +97,7 @@
             app:layout_constraintEnd_toStartOf="@+id/text_weight"
             app:layout_constraintHorizontal_bias="0.55"
             app:layout_constraintStart_toEndOf="@+id/text_national_id"
-            app:layout_constraintTop_toBottomOf="@+id/text_types" />
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_types" />
 
         <View
             android:id="@+id/view_separator_rigth"
@@ -119,7 +119,7 @@
             android:text="28.0 kg"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_types" />
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_types" />
 
         <TextView
             android:id="@+id/textView4"
@@ -160,18 +160,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_abilities" />
 
-
-        <TextView
-            android:id="@+id/evolutions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Evoluções"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_spd" />
 
         <TextView
             android:id="@+id/textView8"
@@ -328,38 +316,43 @@
             app:layout_constraintStart_toEndOf="@+id/view_separator_stats"
             app:layout_constraintTop_toBottomOf="@+id/text_sdef" />
 
-        <TextView
-            android:id="@+id/text_types"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:text="Tipos"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_corner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_detail_pokemon" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/text_abilities"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:text="Habilidades"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:background="@drawable/rounded_corner"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/textView5" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_abilities"
-            android:numColumns="2"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+        <TextView
+            android:id="@+id/evolutions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Evoluções"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_spd" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_evolutions"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/evolutions" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

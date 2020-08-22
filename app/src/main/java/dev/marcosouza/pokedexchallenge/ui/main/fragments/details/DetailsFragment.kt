@@ -1,37 +1,43 @@
 package dev.marcosouza.pokedexchallenge.ui.main.fragments.details
 
+import android.app.ActionBar
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import dev.marcosouza.pokedexchallenge.R
-import dev.marcosouza.pokedexchallenge.model.Abilities
-import dev.marcosouza.pokedexchallenge.model.Ability
-import dev.marcosouza.pokedexchallenge.model.PokemonDetails
+import dev.marcosouza.pokedexchallenge.model.*
 import dev.marcosouza.pokedexchallenge.ui.adapter.AbilityAdapter
+import dev.marcosouza.pokedexchallenge.ui.adapter.TypeAdapter
 import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
 import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
 import dev.marcosouza.pokedexchallenge.util.PokemonTypesUtils
 import dev.marcosouza.pokedexchallenge.util.TopSpacingItemDecoration
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment(),
-    AbilityAdapter.Iteraction{
+    AbilityAdapter.Iteraction,
+    TypeAdapter.Iteraction{
 
     private lateinit var viewModel: MainViewModel
     private lateinit var dataStateListener: DataStateListener
 
     private lateinit var pokemonAdapter: AbilityAdapter
+    private lateinit var typeAdapter: TypeAdapter
     private lateinit var callbackListener: ICallbackListener
 
     /*
@@ -84,13 +90,16 @@ class DetailsFragment : Fragment(),
         // Tipos do pokemon
         val color: Int = PokemonTypesUtils.getColorByType(types[0].type.name)
         val colorType = PokemonTypesUtils.getColor(color, resources)
+
+//        appBarLayout.setBackgroundDrawable(ColorDrawable(Color.parseColor("#95CDBA")));
+
         header.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
 
         text_detail_name_pokemon.text = pokemon.name.capitalize()
         text_detail_id_pokemon.text = "#" + id
 
-        text_types.text = types[0].type.name.capitalize()
-        text_types.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
+        // Tipos
+        loadTypes(types, colorType)
 
         // Habilidades
         loadAbilities(abilities, colorType)
@@ -145,6 +154,16 @@ class DetailsFragment : Fragment(),
         }
     }
 
+    private fun loadTypes(types: List<Types>, colorType: Int) {
+        recycler_view_types.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            addItemDecoration(topSpacingItemDecoration)
+            typeAdapter = TypeAdapter(types, this@DetailsFragment, colorType)
+            adapter = typeAdapter
+        }
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
@@ -155,6 +174,10 @@ class DetailsFragment : Fragment(),
     }
 
     override fun onItemSelected(position: Int, item: Ability) {
+        Toast.makeText(activity, "Item: $item", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onItemSelected(position: Int, item: Type) {
         Toast.makeText(activity, "Item: $item", Toast.LENGTH_LONG).show()
     }
 

@@ -6,65 +6,64 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import dev.marcosouza.pokedexchallenge.R
-import dev.marcosouza.pokedexchallenge.model.Abilities
-import dev.marcosouza.pokedexchallenge.model.Ability
+import dev.marcosouza.pokedexchallenge.model.Type
+import dev.marcosouza.pokedexchallenge.model.Types
 import kotlinx.android.synthetic.main.ability_list_item.view.*
+import kotlinx.android.synthetic.main.type_list_item.view.*
 
-class AbilityAdapter(
-    pokemons: List<Abilities>,
+class TypeAdapter(
+    pokemons: List<Types>,
     private val interaction: Iteraction? = null,
     colorType: Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var abilities = ArrayList<Abilities>()
+    private var types = ArrayList<Types>()
     private var colorType: Int
 
     init {
-        this.abilities = pokemons as ArrayList<Abilities>
+        this.types = pokemons as ArrayList<Types>
         this.colorType = colorType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PokemonViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.ability_list_item,
+                R.layout.type_list_item,
                 parent,
                 false
             ),
-            interaction,
-            colorType
+            interaction
         )
     }
 
     override fun getItemCount(): Int {
-        return this.abilities.size
+        return this.types.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is PokemonViewHolder -> {
-                holder.bind(this.abilities.get(position).ability, colorType)
+                holder.bind(this.types.get(position).type, colorType)
             }
         }
     }
 
     class PokemonViewHolder constructor(
         itemView: View,
-        private val interaction: Iteraction?,
-        colorType: Int
+        private val interaction: Iteraction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-     fun bind(item: Ability, colorType: Int) = with( itemView) {
+     fun bind(item: Type, colorType: Int) = with( itemView) {
 
          itemView.setOnClickListener {
              interaction?.onItemSelected(adapterPosition, item)
          }
-         itemView.text_pokemon_ability.text = item.name.capitalize()
-         text_pokemon_ability.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
+         itemView.text_pokemon_type.text = item.name.capitalize()
+         text_pokemon_type.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
      }
     }
     interface Iteraction {
-        fun onItemSelected(position: Int, item: Ability)
+        fun onItemSelected(position: Int, item: Type)
     }
 }
 
