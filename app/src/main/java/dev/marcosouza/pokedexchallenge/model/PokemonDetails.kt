@@ -100,6 +100,10 @@ class Ability(
         val id = url.split("/".toRegex()).dropLast(1).last()
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
     }
+
+    override fun toString(): String {
+        return "Ability(name='$name', url='$url')"
+    }
 }
 
 

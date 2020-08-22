@@ -6,34 +6,38 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import dev.marcosouza.pokedexchallenge.R
+import dev.marcosouza.pokedexchallenge.model.Abilities
+import dev.marcosouza.pokedexchallenge.model.Ability
 import dev.marcosouza.pokedexchallenge.model.PokemonDetails
+import dev.marcosouza.pokedexchallenge.ui.adapter.AbilityAdapter
 import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
 import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
 import dev.marcosouza.pokedexchallenge.util.PokemonTypesUtils
+import dev.marcosouza.pokedexchallenge.util.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_details.*
 
-
-class DetailsFragment : Fragment() {
+class DetailsFragment : Fragment(),
+    AbilityAdapter.Iteraction{
 
     private lateinit var viewModel: MainViewModel
     private lateinit var dataStateListener: DataStateListener
 
+    private lateinit var pokemonAdapter: AbilityAdapter
     private lateinit var callbackListener: ICallbackListener
 
     /*
     * TODO
-    *   Tela com os detalhes do Pokémon ○ Nome e ID;
     -   Carrossel com as fotos disponíveis do Pokémon
     -   View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
-    -   Exibir suas Habilidades (Run Away, Adaptability, Synchronize etc);
     -   Ao tocar em uma habilidade, exibir um modal com a descrição;
     -   Exibir seus tipos (electric, ground, water, fire etc);
     -   Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo;
@@ -41,14 +45,11 @@ class DetailsFragment : Fragment() {
     -   Exibir spinner (combobox) que permita selecionar as variações do Pokémon (ao selecionar uma variação, o app deve carregar automaticamente os dados da variação selecionada);
     * */
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                activity?.onBackPressed()
-//            }
-//        })
-//    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,8 +93,7 @@ class DetailsFragment : Fragment() {
         text_types.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
 
         // Habilidades
-        text_abilities.text = abilities[0].ability.name.capitalize()
-        text_abilities.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
+        loadAbilities(abilities, colorType)
 
         // Informações básicas do pokemon
         text_national_id.text = pokemon.id
@@ -135,6 +135,16 @@ class DetailsFragment : Fragment() {
         })
     }
 
+    private fun loadAbilities(abilities: List<Abilities>, colorType: Int) {
+        recycler_view_abilities.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            addItemDecoration(topSpacingItemDecoration)
+            pokemonAdapter = AbilityAdapter(abilities, this@DetailsFragment, colorType)
+            adapter = pokemonAdapter
+        }
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
@@ -142,6 +152,10 @@ class DetailsFragment : Fragment() {
         } catch (e: ClassCastException) {
             println("DEBUG: $context must implement DataStateListener")
         }
+    }
+
+    override fun onItemSelected(position: Int, item: Ability) {
+        Toast.makeText(activity, "Item: $item", Toast.LENGTH_LONG).show()
     }
 
 }

@@ -50,7 +50,7 @@
             android:translationZ="100dp"
             android:textColor="@color/white"
             />
-
+        
         <ImageView
             android:id="@+id/image_detail_pokemon"
             android:layout_width="@dimen/detail_image_dimension"
@@ -158,7 +158,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_abilities" />
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_abilities" />
 
 
         <TextView
@@ -340,14 +340,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_detail_pokemon" />
 
-        <TextView
-            android:id="@+id/text_abilities"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Habilidades"
-            android:textColor="@color/white"
-            android:background="@drawable/rounded_corner"
+<!--        <TextView-->
+<!--            android:id="@+id/text_abilities"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="Habilidades"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:background="@drawable/rounded_corner"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView5" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_abilities"
+            android:numColumns="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />

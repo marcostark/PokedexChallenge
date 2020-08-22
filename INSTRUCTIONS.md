@@ -19,8 +19,8 @@ bem-vindos! =)
 
 ### Requisitos Funcionais do App:
 
-Tela inicial com lista com todos os Pokémons
-    -   Busca por ID ou Nome utilizando o Search Dialog
+    [x] Tela inicial com lista com todos os Pokémons
+    [x] Busca por ID ou Nome utilizando o Search Dialog
     [x] Paginação utilizando Endless Scrolling
     [x] Foto default do Pokémon na listagem
     [X] Tela com os detalhes do Pokémon ○ Nome e ID;
