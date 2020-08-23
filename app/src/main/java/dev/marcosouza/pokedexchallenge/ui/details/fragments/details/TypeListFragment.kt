@@ -16,10 +16,9 @@ import dev.marcosouza.pokedexchallenge.ui.adapter.PokemonTypeAdapter
 import dev.marcosouza.pokedexchallenge.ui.details.DetailsViewModel
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
-import dev.marcosouza.pokedexchallenge.util.TopSpacingItemDecoration
-import kotlinx.android.synthetic.main.fragment_type_list_dialog_list_dialog.*
+import kotlinx.android.synthetic.main.fragment_type_pokemon_list.*
 
-class TypeListDialogFragment : Fragment(),
+class TypeListFragment : Fragment(),
     PokemonTypeAdapter.Iteraction
 {
     private lateinit var viewModel: DetailsViewModel
@@ -30,7 +29,7 @@ class TypeListDialogFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_type_list_dialog_list_dialog, container, false)
+        return inflater.inflate(R.layout.fragment_type_pokemon_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,9 +47,7 @@ class TypeListDialogFragment : Fragment(),
     private fun initRecyclerView() {
         recycler_view_pokemon_types.apply {
             layoutManager = LinearLayoutManager(activity)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
-            addItemDecoration(topSpacingItemDecoration)
-            pokemonTypeAdapter = PokemonTypeAdapter(ArrayList(), this@TypeListDialogFragment)
+            pokemonTypeAdapter = PokemonTypeAdapter(ArrayList(), this@TypeListFragment)
             adapter = pokemonTypeAdapter
 
         }

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.Pokemon
 import dev.marcosouza.pokedexchallenge.model.Pokemons
-import kotlinx.android.synthetic.main.fragment_type_list_dialog_list_dialog_item.view.*
+import kotlinx.android.synthetic.main.type_pokemon_list_item.view.*
 
 
 class PokemonTypeAdapter(
@@ -25,7 +25,7 @@ class PokemonTypeAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PokemonViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.fragment_type_list_dialog_list_dialog_item,
+                R.layout.type_pokemon_list_item,
                 parent,
                 false
             ),

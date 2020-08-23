@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.*
 import dev.marcosouza.pokedexchallenge.ui.details.fragments.details.DetailsFragment
-import dev.marcosouza.pokedexchallenge.ui.details.fragments.details.TypeListDialogFragment
+import dev.marcosouza.pokedexchallenge.ui.details.fragments.details.TypeListFragment
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.util.Constants.Companion.INPUT_EXTRA_POKEMON
@@ -41,9 +41,10 @@ class DetailsActivity : AppCompatActivity(),
 
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(
+        .replace(
                 R.id.fragment_details_container,
                 fragment, "fragment")
+            .addToBackStack(null)
             .commit()
     }
 
@@ -75,15 +76,17 @@ class DetailsActivity : AppCompatActivity(),
         }
     }
 
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        finish()
-//    }
-//
-//    override fun onSupportNavigateUp(): Boolean {
-//        onBackPressed()
-//        return true
-//    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            finish();
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
     override fun onCallDialogAbilityDetails(ability: PokemonAbility) {
         showSimpleAlert(ability)
@@ -91,7 +94,7 @@ class DetailsActivity : AppCompatActivity(),
 
     override fun onCallPokemonsByType(type: Type) {
         viewModel.setType(type)
-        this.showFragment(TypeListDialogFragment())
+        this.showFragment(TypeListFragment())
     }
     override fun onCallAbilityDetails(ability: Ability) {
         viewModel.setAbility(ability)
@@ -102,9 +105,7 @@ class DetailsActivity : AppCompatActivity(),
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle(details.name.capitalize())
         alertDialog.setMessage(details.entries[0].effet)
-
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK") { _, _ -> }
-
         alertDialog.show()
     }
 }
