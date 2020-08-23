@@ -34,7 +34,7 @@ interface ApiService {
         @Path("id") id: Int
     ) : LiveData<GenericApiResponse<PokemonDetails>>
 
-    @GET("pokemon/{query}")
+    @GET("ability/{query}")
     fun getAbility(
         @Path("query") query: String
     ) : LiveData<GenericApiResponse<PokemonAbility>>

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import dev.marcosouza.pokedexchallenge.model.Ability
 import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.model.PokemonAbility
 import dev.marcosouza.pokedexchallenge.model.PokemonDetails
 import dev.marcosouza.pokedexchallenge.repository.PokemonRepository
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
@@ -19,10 +21,15 @@ class DetailsViewModel : ViewModel() {
     private var _currentPage: Int = 0;
 
     private var _selectedPokemon = MutableLiveData<Pokemon>()
+    private var _selectedAbility = MutableLiveData<Ability>()
     private var _query = MutableLiveData<String>()
 
     fun setPokemon(pokemon: Pokemon) {
         _selectedPokemon.value =  pokemon
+    }
+
+    fun setAbility(ability: Ability) {
+        _selectedAbility.value =  ability
     }
 
     val viewState: LiveData<DetailsViewState>
@@ -41,7 +48,7 @@ class DetailsViewModel : ViewModel() {
             }
 
             is DetailsStateEvent.GetPokemonAbilities -> {
-                PokemonRepository.getAbilities(_query.value.toString());
+                PokemonRepository.getAbilities(_selectedAbility.value?.name.toString())
             }
 
             is DetailsStateEvent.GetPokemonEvolutions -> {
@@ -51,7 +58,6 @@ class DetailsViewModel : ViewModel() {
             is DetailsStateEvent.None -> {
                 AbsentLiveData.create()
             }
-
         }
     }
 
@@ -60,6 +66,12 @@ class DetailsViewModel : ViewModel() {
     fun setPokemonDetailData(details: PokemonDetails){
         val update = getCurrentViewStateOrNew()
         update.pokemon = details
+        _viewState.value = update
+    }
+
+    fun setAbilitiesDetailData(details: PokemonAbility){
+        val update = getCurrentViewStateOrNew()
+        update.abilities = details
         _viewState.value = update
     }
 

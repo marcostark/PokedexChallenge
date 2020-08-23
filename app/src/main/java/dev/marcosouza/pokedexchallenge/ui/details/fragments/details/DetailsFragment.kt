@@ -1,12 +1,15 @@
 package dev.marcosouza.pokedexchallenge.ui.details.fragments.details
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +21,7 @@ import dev.marcosouza.pokedexchallenge.ui.adapter.AbilityAdapter
 import dev.marcosouza.pokedexchallenge.ui.adapter.EvolutionAdapter
 import dev.marcosouza.pokedexchallenge.ui.adapter.TypeAdapter
 import dev.marcosouza.pokedexchallenge.ui.details.DetailsViewModel
+import dev.marcosouza.pokedexchallenge.ui.details.ICallbackDetailsListener
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
 import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
 import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
@@ -31,21 +35,17 @@ class DetailsFragment : Fragment(),
     AbilityAdapter.Iteraction,
     TypeAdapter.Iteraction{
 
-    //private lateinit var viewModel: MainViewModel
     private lateinit var viewModel: DetailsViewModel
     private lateinit var dataStateListener: DataStateListener
 
     private lateinit var pokemonAdapter: AbilityAdapter
     private lateinit var typeAdapter: TypeAdapter
     private lateinit var evolutionAdapter: EvolutionAdapter
-    private lateinit var callbackListener: ICallbackListener
+    private lateinit var callbackListener: ICallbackDetailsListener
 
     /*
     * TODO
     -   Carrossel com as fotos disponíveis do Pokémon
-    -   View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
-    -   Ao tocar em uma habilidade, exibir um modal com a descrição;
-    -   Exibir seus tipos (electric, ground, water, fire etc);
     -   Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo;
     -   Exibir a cadeia de evolução do Pokémon;
     -   Exibir spinner (combobox) que permita selecionar as variações do Pokémon (ao selecionar uma variação, o app deve carregar automaticamente os dados da variação selecionada);
@@ -82,6 +82,7 @@ class DetailsFragment : Fragment(),
                 .into(image_detail_pokemon)
         }
 
+        activity?.actionBar?.setBackgroundDrawable(ColorDrawable(Color.rgb(248, 248, 248)))
         val id = pokemon.id
         val stats = pokemon.stats
         val types = pokemon.types
@@ -90,8 +91,6 @@ class DetailsFragment : Fragment(),
         // Tipos do pokemon
         val color: Int = PokemonTypesUtils.getColorByType(types[0].type.name)
         val colorType = PokemonTypesUtils.getColor(color, resources)
-
-//        appBarLayout.setBackgroundDrawable(ColorDrawable(Color.parseColor("#95CDBA")));
 
         header.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
 
@@ -133,6 +132,10 @@ class DetailsFragment : Fragment(),
                     mainViewState.pokemon?.let { pokemons ->
                         viewModel.setPokemonDetailData(pokemons)
                     }
+
+                    mainViewState.abilities?.let { abilities ->
+                        viewModel.setAbilitiesDetailData(abilities)
+                    }
                 }
             }
         })
@@ -140,6 +143,9 @@ class DetailsFragment : Fragment(),
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.pokemon?.let { pokemon ->
                 updateUi(pokemon)
+            }
+            viewState.abilities?.let { abilities ->
+                this.callbackListener.onCallDialogAbilityDetails(abilities)
             }
         })
     }
@@ -184,11 +190,14 @@ class DetailsFragment : Fragment(),
     }
 
     override fun onItemSelected(position: Int, item: Ability) {
-        Toast.makeText(activity, "Item: $item", Toast.LENGTH_LONG).show()
+        this.callbackListener.onCallAbilityDetails(item)
     }
 
     override fun onItemSelected(position: Int, item: Type) {
         Toast.makeText(activity, "Item: $item", Toast.LENGTH_LONG).show()
     }
 
+    fun setOnPokemonAbilityClickListener(OnPokemonAbilityClickListener: ICallbackDetailsListener) {
+        this.callbackListener = OnPokemonAbilityClickListener
+    }
 }

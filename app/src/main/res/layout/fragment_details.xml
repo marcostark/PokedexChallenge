@@ -320,12 +320,12 @@
             android:id="@+id/recycler_view_types"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@+id/image_detail_pokemon" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_abilities"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
