@@ -1,10 +1,7 @@
 package dev.marcosouza.pokedexchallenge.repository
 
 import androidx.lifecycle.LiveData
-import dev.marcosouza.pokedexchallenge.model.Pokemon
-import dev.marcosouza.pokedexchallenge.model.PokemonAbility
-import dev.marcosouza.pokedexchallenge.model.PokemonDetails
-import dev.marcosouza.pokedexchallenge.model.PokemonResponse
+import dev.marcosouza.pokedexchallenge.model.*
 import dev.marcosouza.pokedexchallenge.network.CustomRetrofitBuilder
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsViewState
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainViewState
@@ -88,6 +85,21 @@ object PokemonRepository {
             }
             override fun createCall(): LiveData<GenericApiResponse<PokemonAbility>> {
                 return CustomRetrofitBuilder.apiService.getAbility(query)
+            }
+        }.asLiveData()
+    }
+
+    fun getType(
+        query: String
+    ): LiveData<DataState<DetailsViewState>> {
+        return object: NetworkBoundResource<PokemonType, DetailsViewState>(){
+            override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonType>) {
+                result.value = DataState.data(data = DetailsViewState(
+                    type = response.body
+                ))
+            }
+            override fun createCall(): LiveData<GenericApiResponse<PokemonType>> {
+                return CustomRetrofitBuilder.apiService.getType(query)
             }
         }.asLiveData()
     }

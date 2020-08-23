@@ -8,6 +8,8 @@ sealed class DetailsStateEvent {
 
     class GetPokemonAbilities: DetailsStateEvent()
 
+    class GetPokemonType: DetailsStateEvent()
+
     class None: DetailsStateEvent()
 
 }

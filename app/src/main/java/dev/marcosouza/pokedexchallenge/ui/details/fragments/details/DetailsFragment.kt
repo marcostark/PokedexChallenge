@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,10 +22,7 @@ import dev.marcosouza.pokedexchallenge.ui.adapter.TypeAdapter
 import dev.marcosouza.pokedexchallenge.ui.details.DetailsViewModel
 import dev.marcosouza.pokedexchallenge.ui.details.ICallbackDetailsListener
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
-import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
-import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
-import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
 import dev.marcosouza.pokedexchallenge.util.PokemonTypesUtils
 import dev.marcosouza.pokedexchallenge.util.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_details.*
@@ -170,16 +166,6 @@ class DetailsFragment : Fragment(),
         }
     }
 
-    private fun loadEvolution(pokemons: List<Pokemon>) {
-        recycler_view_evolutions.apply {
-            layoutManager = GridLayoutManager(activity, 2)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
-            addItemDecoration(topSpacingItemDecoration)
-            evolutionAdapter = EvolutionAdapter(pokemons)
-            adapter = evolutionAdapter
-        }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
@@ -194,7 +180,7 @@ class DetailsFragment : Fragment(),
     }
 
     override fun onItemSelected(position: Int, item: Type) {
-        Toast.makeText(activity, "Item: $item", Toast.LENGTH_LONG).show()
+       this.callbackListener.onCallPokemonsByType(item)
     }
 
     fun setOnPokemonAbilityClickListener(OnPokemonAbilityClickListener: ICallbackDetailsListener) {

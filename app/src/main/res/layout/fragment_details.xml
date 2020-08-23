@@ -320,39 +320,15 @@
             android:id="@+id/recycler_view_types"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@+id/image_detail_pokemon" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_abilities"
-            android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-
-        <TextView
-            android:id="@+id/evolutions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Evoluções"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_spd" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_evolutions"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/evolutions" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

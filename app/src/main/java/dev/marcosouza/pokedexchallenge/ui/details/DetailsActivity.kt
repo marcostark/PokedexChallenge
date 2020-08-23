@@ -8,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dev.marcosouza.pokedexchallenge.R
-import dev.marcosouza.pokedexchallenge.model.Ability
-import dev.marcosouza.pokedexchallenge.model.Pokemon
-import dev.marcosouza.pokedexchallenge.model.PokemonAbility
+import dev.marcosouza.pokedexchallenge.model.*
 import dev.marcosouza.pokedexchallenge.ui.details.fragments.details.DetailsFragment
+import dev.marcosouza.pokedexchallenge.ui.details.fragments.details.TypeListDialogFragment
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.util.Constants.Companion.INPUT_EXTRA_POKEMON
@@ -76,20 +75,24 @@ class DetailsActivity : AppCompatActivity(),
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        finish()
+//    }
+//
+//    override fun onSupportNavigateUp(): Boolean {
+//        onBackPressed()
+//        return true
+//    }
 
     override fun onCallDialogAbilityDetails(ability: PokemonAbility) {
         showSimpleAlert(ability)
     }
 
+    override fun onCallPokemonsByType(type: Type) {
+        viewModel.setType(type)
+        this.showFragment(TypeListDialogFragment())
+    }
     override fun onCallAbilityDetails(ability: Ability) {
         viewModel.setAbility(ability)
         viewModel.setStateEvent(DetailsStateEvent.GetPokemonAbilities())

@@ -22,6 +22,11 @@ class Pokemon(
         return "https://pokeres.bastionbot.org/images/pokemon/$id.png"
     }
 
+    fun getId(): String {
+        return url.split("/".toRegex()).dropLast(1).last()
+    }
+
+
     override fun toString(): String {
         return "Pokemon(name='$name', url='$url')"
     }

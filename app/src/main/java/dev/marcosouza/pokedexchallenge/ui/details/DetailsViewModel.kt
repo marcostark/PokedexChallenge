@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import dev.marcosouza.pokedexchallenge.model.Ability
-import dev.marcosouza.pokedexchallenge.model.Pokemon
-import dev.marcosouza.pokedexchallenge.model.PokemonAbility
-import dev.marcosouza.pokedexchallenge.model.PokemonDetails
+import dev.marcosouza.pokedexchallenge.model.*
 import dev.marcosouza.pokedexchallenge.repository.PokemonRepository
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsViewState
@@ -22,6 +19,7 @@ class DetailsViewModel : ViewModel() {
 
     private var _selectedPokemon = MutableLiveData<Pokemon>()
     private var _selectedAbility = MutableLiveData<Ability>()
+    private var _selectedType = MutableLiveData<Type>()
     private var _query = MutableLiveData<String>()
 
     fun setPokemon(pokemon: Pokemon) {
@@ -30,6 +28,10 @@ class DetailsViewModel : ViewModel() {
 
     fun setAbility(ability: Ability) {
         _selectedAbility.value =  ability
+    }
+
+    fun setType(type: Type) {
+        _selectedType.value =  type
     }
 
     val viewState: LiveData<DetailsViewState>
@@ -55,6 +57,12 @@ class DetailsViewModel : ViewModel() {
                 PokemonRepository.getEvolutions("1");
             }
 
+            is DetailsStateEvent.GetPokemonType -> {
+                println("DEBUG: ${_selectedType.value?.name.toString()}")
+                PokemonRepository.getType(_selectedType.value?.name.toString());
+            }
+
+
             is DetailsStateEvent.None -> {
                 AbsentLiveData.create()
             }
@@ -72,6 +80,12 @@ class DetailsViewModel : ViewModel() {
     fun setAbilitiesDetailData(details: PokemonAbility){
         val update = getCurrentViewStateOrNew()
         update.abilities = details
+        _viewState.value = update
+    }
+
+    fun setPokemonTypeData(type: PokemonType){
+        val update = getCurrentViewStateOrNew()
+        update.type = type
         _viewState.value = update
     }
 
