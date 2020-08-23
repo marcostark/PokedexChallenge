@@ -2,9 +2,11 @@ package dev.marcosouza.pokedexchallenge.repository
 
 import androidx.lifecycle.LiveData
 import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.model.PokemonAbility
 import dev.marcosouza.pokedexchallenge.model.PokemonDetails
 import dev.marcosouza.pokedexchallenge.model.PokemonResponse
 import dev.marcosouza.pokedexchallenge.network.CustomRetrofitBuilder
+import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsViewState
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainViewState
 import dev.marcosouza.pokedexchallenge.util.ApiSuccessResponse
 import dev.marcosouza.pokedexchallenge.util.Constants
@@ -32,10 +34,10 @@ object PokemonRepository {
 
     fun getPokemon(
         name: String
-    ): LiveData<DataState<MainViewState>> {
-        return object: NetworkBoundResource<PokemonDetails, MainViewState>(){
+    ): LiveData<DataState<DetailsViewState>> {
+        return object: NetworkBoundResource<PokemonDetails, DetailsViewState>(){
             override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonDetails>) {
-                result.value = DataState.data(data = MainViewState(
+                result.value = DataState.data(data = DetailsViewState(
                     pokemon = response.body
                 ))
             }
@@ -56,6 +58,36 @@ object PokemonRepository {
             }
             override fun createCall(): LiveData<GenericApiResponse<PokemonDetails>> {
                 return CustomRetrofitBuilder.apiService.getPokemonByName(query)
+            }
+        }.asLiveData()
+    }
+
+    fun getEvolutions(
+        query: String
+    ): LiveData<DataState<DetailsViewState>> {
+        return object: NetworkBoundResource<PokemonDetails, DetailsViewState>(){
+            override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonDetails>) {
+                result.value = DataState.data(data = DetailsViewState(
+                    pokemon = response.body
+                ))
+            }
+            override fun createCall(): LiveData<GenericApiResponse<PokemonDetails>> {
+                return CustomRetrofitBuilder.apiService.getPokemonByName(query)
+            }
+        }.asLiveData()
+    }
+
+    fun getAbilities(
+        query: String
+    ): LiveData<DataState<DetailsViewState>> {
+        return object: NetworkBoundResource<PokemonAbility, DetailsViewState>(){
+            override fun handleApiSucessResponse(response: ApiSuccessResponse<PokemonAbility>) {
+                result.value = DataState.data(data = DetailsViewState(
+                    abilities = response.body
+                ))
+            }
+            override fun createCall(): LiveData<GenericApiResponse<PokemonAbility>> {
+                return CustomRetrofitBuilder.apiService.getAbility(query)
             }
         }.asLiveData()
     }

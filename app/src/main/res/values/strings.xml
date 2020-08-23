@@ -15,4 +15,5 @@
     <string name="spd">SPD</string>
     <string name="stats_value">300</string>
     <string name="search_pokemon">Buscar Pokemon</string>
+    <string name="pokemon_id">#123</string>
 </resources>

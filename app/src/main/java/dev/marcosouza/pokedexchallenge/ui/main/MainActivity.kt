@@ -1,5 +1,7 @@
 package dev.marcosouza.pokedexchallenge.ui.main
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,9 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.Pokemon
-import dev.marcosouza.pokedexchallenge.ui.main.fragments.details.DetailsFragment
+import dev.marcosouza.pokedexchallenge.ui.details.DetailsActivity
 import dev.marcosouza.pokedexchallenge.ui.main.fragments.main.MainFragment
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
+import dev.marcosouza.pokedexchallenge.util.Constants.Companion.INPUT_EXTRA_POKEMON
 import dev.marcosouza.pokedexchallenge.util.DataState
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -35,6 +38,12 @@ class MainActivity : AppCompatActivity(),
                 R.id.fragment_container,
                 fragment, "fragment")
             .commit()
+    }
+
+    private fun goToActivity(activity: Activity, pokemon: Pokemon) {
+        val intent = Intent(this, activity::class.java)
+        intent.putExtra(INPUT_EXTRA_POKEMON, pokemon)
+        startActivity(intent)
     }
 
     private fun handleDataStateChange(dataState: DataState<*>?) {
@@ -72,24 +81,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onCallBackLaunchDetails(pokemon: Pokemon) {
-        println("DEBUG: ITEM: $pokemon")
         viewModel.setPokemon(pokemon)
-        this.showFragment(DetailsFragment())
+        this.goToActivity(DetailsActivity(), pokemon)
     }
-
-//    override fun onBackPressed() {
-//        val fragmentList: List<*> = supportFragmentManager.fragments
-//        var handled = false
-//        for (f in fragmentList) {
-//            if (f is BaseFragment) {
-//                handled = (f as BaseFragment).onBackPressed()
-//                if (handled) {
-//                    break
-//                }
-//            }
-//        }
-//        if (!handled) {
-//            super.onBackPressed()
-//        }
-//    }
 }

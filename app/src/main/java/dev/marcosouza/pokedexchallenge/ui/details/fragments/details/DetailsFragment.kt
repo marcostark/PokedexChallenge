@@ -1,16 +1,12 @@
-package dev.marcosouza.pokedexchallenge.ui.main.fragments.details
+package dev.marcosouza.pokedexchallenge.ui.details.fragments.details
 
-import android.app.ActionBar
 import android.content.Context
-import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,25 +15,29 @@ import com.bumptech.glide.Glide
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.*
 import dev.marcosouza.pokedexchallenge.ui.adapter.AbilityAdapter
+import dev.marcosouza.pokedexchallenge.ui.adapter.EvolutionAdapter
 import dev.marcosouza.pokedexchallenge.ui.adapter.TypeAdapter
+import dev.marcosouza.pokedexchallenge.ui.details.DetailsViewModel
+import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
 import dev.marcosouza.pokedexchallenge.ui.main.ICallbackListener
 import dev.marcosouza.pokedexchallenge.ui.main.MainViewModel
 import dev.marcosouza.pokedexchallenge.ui.main.state.DataStateListener
 import dev.marcosouza.pokedexchallenge.ui.main.state.MainStateEvent
 import dev.marcosouza.pokedexchallenge.util.PokemonTypesUtils
 import dev.marcosouza.pokedexchallenge.util.TopSpacingItemDecoration
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment(),
     AbilityAdapter.Iteraction,
     TypeAdapter.Iteraction{
 
-    private lateinit var viewModel: MainViewModel
+    //private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: DetailsViewModel
     private lateinit var dataStateListener: DataStateListener
 
     private lateinit var pokemonAdapter: AbilityAdapter
     private lateinit var typeAdapter: TypeAdapter
+    private lateinit var evolutionAdapter: EvolutionAdapter
     private lateinit var callbackListener: ICallbackListener
 
     /*
@@ -67,7 +67,7 @@ class DetailsFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = activity?.run {
-            ViewModelProvider(this).get(MainViewModel::class.java)
+            ViewModelProvider(this).get(DetailsViewModel::class.java)
         }?:throw Exception("Invalid Activity!")
 
         subscribeObververs()
@@ -119,7 +119,7 @@ class DetailsFragment : Fragment(),
     }
 
     private fun triggerGetPokemonDetailsEvent() {
-        viewModel.setStateEvent(MainStateEvent.GetPokemonDetails())
+        viewModel.setStateEvent(DetailsStateEvent.GetPokemonDetails())
     }
 
     private fun subscribeObververs() {
@@ -161,6 +161,16 @@ class DetailsFragment : Fragment(),
             addItemDecoration(topSpacingItemDecoration)
             typeAdapter = TypeAdapter(types, this@DetailsFragment, colorType)
             adapter = typeAdapter
+        }
+    }
+
+    private fun loadEvolution(pokemons: List<Pokemon>) {
+        recycler_view_evolutions.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            addItemDecoration(topSpacingItemDecoration)
+            evolutionAdapter = EvolutionAdapter(pokemons)
+            adapter = evolutionAdapter
         }
     }
 

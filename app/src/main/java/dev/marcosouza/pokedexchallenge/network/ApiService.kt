@@ -2,6 +2,7 @@ package dev.marcosouza.pokedexchallenge.network
 
 import androidx.lifecycle.LiveData
 import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.model.PokemonAbility
 import dev.marcosouza.pokedexchallenge.model.PokemonDetails
 import dev.marcosouza.pokedexchallenge.model.PokemonResponse
 import dev.marcosouza.pokedexchallenge.util.Constants
@@ -27,4 +28,14 @@ interface ApiService {
     fun getPokemonById(
         @Path("id") id: Int
     ) : LiveData<GenericApiResponse<PokemonDetails>>
+
+    @GET("evolution-chain/{id}")
+    fun getEvolutions(
+        @Path("id") id: Int
+    ) : LiveData<GenericApiResponse<PokemonDetails>>
+
+    @GET("pokemon/{query}")
+    fun getAbility(
+        @Path("query") query: String
+    ) : LiveData<GenericApiResponse<PokemonAbility>>
 }

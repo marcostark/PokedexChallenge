@@ -38,5 +38,18 @@
             android:maxLines="1"
             android:textSize="18sp"
             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pokemon_id"
+            android:textStyle="bold"
+            android:id="@+id/text_name_pokemon_evolution_id"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="14sp"
+            />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

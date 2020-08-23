@@ -41,10 +41,6 @@ class MainViewModel : ViewModel() {
                 PokemonRepository.getAllPokemons(_currentPage)
             }
 
-            is MainStateEvent.GetPokemonDetails -> {
-                PokemonRepository.getPokemon(_selectedPokemon.value!!.name);
-            }
-
             is MainStateEvent.GetSearchPokemon -> {
                 PokemonRepository.getSearchPokemon(_query.value.toString());
             }
@@ -92,9 +88,4 @@ class MainViewModel : ViewModel() {
     fun setQuery(query: String){
         _query.value = query
     }
-
-
-//    fun loadPokemons() {
-//        PokemonRepository.getAllPokemons(page)
-//    }
 }
