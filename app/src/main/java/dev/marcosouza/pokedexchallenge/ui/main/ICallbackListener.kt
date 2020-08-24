@@ -5,4 +5,5 @@ import dev.marcosouza.pokedexchallenge.model.Pokemon
 interface ICallbackListener {
 
     fun onCallBackLaunchDetails(pokemon: Pokemon)
+
 }

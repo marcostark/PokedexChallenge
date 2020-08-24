@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_horizontal">16dp</dimen>
+    <dimen name="detail_image_dimension">150dp</dimen>
+    <dimen name="text_size_stats">18sp</dimen>
+    <dimen name="margin_top_stats">4dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
+    <dimen name="margin_horizontal_stats">32</dimen>
+    <dimen name="header_size">220dp</dimen>
+    <dimen name="header_elevation">9dp</dimen>
+</resources>

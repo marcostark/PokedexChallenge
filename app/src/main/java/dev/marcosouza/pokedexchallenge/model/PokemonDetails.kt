@@ -10,7 +10,7 @@ class PokemonDetails(
 
     @Expose
     @SerializedName("id")
-    val id: String,
+    val id: Int,
 
     @Expose
     @SerializedName("name")
@@ -30,7 +30,7 @@ class PokemonDetails(
 
     @Expose
     @SerializedName("abilities")
-    val abilities: List<Ability>,
+    val abilities: List<Abilities>,
 
     @Expose
     @SerializedName("types")
@@ -45,12 +45,13 @@ class PokemonDetails(
 
     fun getImageUrl(): String {
         val id = id
-        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+        //return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+        return "https://pokeres.bastionbot.org/images/pokemon/$id.png"
     }
 
-    override fun toString(): String {
-        return "Pokemon(name='$name', id='$id')"
-    }
+    fun getIdFormatted():String = String.format("#%03d", id)
+    fun getWeightFormatted():String = String.format("%.1f KG", weight.toFloat() / 10)
+    fun getHeightFormatted():String = String.format("%.1f M", height.toFloat() / 10)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -69,7 +70,20 @@ class PokemonDetails(
         result = 31 * result + name.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "PokemonDetails(id='$id', name='$name', weight=$weight, height=$height, order=$order, abilities=$abilities, types=$types, stats=$stats)"
+    }
 }
+
+@Parcelize
+class Abilities(
+
+    @Expose
+    @SerializedName("ability")
+    val ability: Ability
+
+) : Parcelable { }
 
 @Parcelize
 class Ability(
@@ -88,10 +102,28 @@ class Ability(
         val id = url.split("/".toRegex()).dropLast(1).last()
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
     }
+
+    override fun toString(): String {
+        return "Ability(name='$name', url='$url')"
+    }
 }
+
 
 @Parcelize
 class Types(
+
+    @Expose
+    @SerializedName("slot")
+    val slot: String,
+
+    @Expose
+    @SerializedName("type")
+    val type: Type
+
+) : Parcelable { }
+
+@Parcelize
+class Type(
 
     @Expose
     @SerializedName("name")
@@ -124,7 +156,11 @@ class Stats(
     @SerializedName("stat")
     val stat: Stat
 
-) : Parcelable { }
+) : Parcelable {
+    override fun toString(): String {
+        return "Stats(baseStat='$baseStat', effort='$effort', stat=$stat)"
+    }
+}
 
 @Parcelize
 class Stat(

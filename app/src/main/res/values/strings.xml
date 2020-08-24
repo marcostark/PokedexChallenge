@@ -1,6 +1,25 @@
 <resources>
-    <string name="app_name">PokedexChallenge</string>
+    <string name="app_name">Pokedex</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Pokemon</string>
+    <string name="description">Pokemon</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="text_stats">Estatísticas básicas</string>
+    <string name="hp">HP</string>
+    <string name="atk">ATTACK</string>
+    <string name="def">DEFENSE</string>
+    <string name="satk">SPECIAL ATTACK</string>
+    <string name="sdef">SPECIAL DEFENSE</string>
+    <string name="spd">SPEED</string>
+    <string name="stats_value">300</string>
+    <string name="search_pokemon">Buscar Pokemon</string>
+    <string name="pokemon_id">#123</string>
+    <string name="ability">Habilidade</string>
+    <string name="id_zerp">#000</string>
+    <string name="height_zero">0.0 M</string>
+    <string name="weight_zero">0.0 kg</string>
+    <string name="national_id">National ID</string>
+    <string name="type">Type</string>
 </resources>
