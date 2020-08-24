@@ -181,7 +181,7 @@
             android:layout_marginStart="16dp"
             android:background="#A9A9A9"
             app:layout_constraintBottom_toBottomOf="@+id/textView13"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="@+id/textView8" />
 
 

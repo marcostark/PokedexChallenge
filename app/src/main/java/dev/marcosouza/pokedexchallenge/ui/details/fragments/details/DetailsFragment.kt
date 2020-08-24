@@ -81,7 +81,7 @@ class DetailsFragment : Fragment(),
         header.background.setColorFilter(colorType, PorterDuff.Mode.SRC_ATOP);
 
         text_detail_name_pokemon.text = pokemon.name.capitalize()
-        text_detail_id_pokemon.text = "#" + id
+        text_detail_id_pokemon.text = pokemon.getIdFormatted()
 
         // Tipos
         loadTypes(types, colorType)
@@ -90,9 +90,9 @@ class DetailsFragment : Fragment(),
         loadAbilities(abilities, colorType)
 
         // Informações básicas do pokemon
-        text_national_id.text = pokemon.id
-        text_height.text = pokemon.height.toString()
-        text_weight.text = pokemon.weight.toString()
+        text_national_id.text = pokemon.getIdFormatted()
+        text_height.text = pokemon.getHeightFormatted()
+        text_weight.text = pokemon.getWeightFormatted()
 
         // Estatisticas basicas do pokemon
         text_hp.text = stats[0].baseStat

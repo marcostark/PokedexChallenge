@@ -23,7 +23,8 @@ class Pokemon(
     }
 
     fun getId(): String {
-        return url.split("/".toRegex()).dropLast(1).last()
+        val id = url.split("/".toRegex()).dropLast(1).last()
+        return String.format("#%03d", id.toInt())
     }
 
 

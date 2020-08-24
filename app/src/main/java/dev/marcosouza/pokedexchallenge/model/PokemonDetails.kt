@@ -10,7 +10,7 @@ class PokemonDetails(
 
     @Expose
     @SerializedName("id")
-    val id: String,
+    val id: Int,
 
     @Expose
     @SerializedName("name")
@@ -49,7 +49,9 @@ class PokemonDetails(
         return "https://pokeres.bastionbot.org/images/pokemon/$id.png"
     }
 
-
+    fun getIdFormatted():String = String.format("#%03d", id)
+    fun getWeightFormatted():String = String.format("%.1f KG", weight.toFloat() / 10)
+    fun getHeightFormatted():String = String.format("%.1f M", height.toFloat() / 10)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

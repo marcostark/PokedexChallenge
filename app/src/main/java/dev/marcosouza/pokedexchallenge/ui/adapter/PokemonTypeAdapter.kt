@@ -63,7 +63,7 @@ class PokemonTypeAdapter(
          }
 
          itemView.text_type_pokemon_name.text = item.name.capitalize()
-         itemView.text_type_pokemon_id.text = "#${item.getId()}"
+         itemView.text_type_pokemon_id.text = item.getId()
          Glide.with(itemView.context)
              .load(item.getImageUrl())
              .into(itemView.image_type_pokemon)
