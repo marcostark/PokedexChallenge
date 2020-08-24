@@ -15,8 +15,8 @@
         <ImageView
             android:id="@+id/header"
             android:background="@drawable/bg"
-            android:layout_height="220dp"
-            android:elevation="9dp"
+            android:layout_height="@dimen/header_size"
+            android:elevation="@dimen/header_elevation"
             android:layout_width="match_parent"
             android:contentDescription="@string/description"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="36dp"
             android:textSize="30sp"
-            android:text="Pokemon"
             android:translationZ="100dp"
             android:textColor="@color/white"/>
 
@@ -44,7 +43,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="22sp"
-            android:text="#001"
             android:layout_marginEnd="@dimen/margin_horizontal"
             android:layout_marginTop="28dp"
             android:translationZ="100dp"
@@ -72,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="001"
+            android:text="@string/id_zerp"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_types" />
@@ -92,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="0.5 M"
+            android:text="@string/height_zero"
             android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/text_weight"
             app:layout_constraintHorizontal_bias="0.55"
@@ -116,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:text="28.0 kg"
+            android:text="@string/weight_zero"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_types" />
@@ -126,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="National ID"
+            android:text="@string/national_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_national_id" />
 

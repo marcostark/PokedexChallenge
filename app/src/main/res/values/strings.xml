@@ -16,4 +16,10 @@
     <string name="stats_value">300</string>
     <string name="search_pokemon">Buscar Pokemon</string>
     <string name="pokemon_id">#123</string>
+    <string name="ability">Habilidade</string>
+    <string name="id_zerp">#000</string>
+    <string name="height_zero">0.0 M</string>
+    <string name="weight_zero">0.0 kg</string>
+    <string name="national_id">National ID</string>
+    <string name="type">Type</string>
 </resources>

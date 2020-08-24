@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/text_pokemon_type"
             android:textAlignment="center"
-            android:text="Tipo"
+            android:text="@string/type"
             android:background="@drawable/rounded_corner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
