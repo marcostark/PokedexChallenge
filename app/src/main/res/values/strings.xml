@@ -8,11 +8,11 @@
     <string name="height">Height</string>
     <string name="text_stats">Estatísticas básicas</string>
     <string name="hp">HP</string>
-    <string name="atk">ATK</string>
-    <string name="def">DEF</string>
-    <string name="satk">SATK</string>
-    <string name="sdef">SDEF</string>
-    <string name="spd">SPD</string>
+    <string name="atk">ATTACK</string>
+    <string name="def">DEFENSE</string>
+    <string name="satk">SPECIAL ATTACK</string>
+    <string name="sdef">SPECIAL DEFENSE</string>
+    <string name="spd">SPEED</string>
     <string name="stats_value">300</string>
     <string name="search_pokemon">Buscar Pokemon</string>
     <string name="pokemon_id">#123</string>

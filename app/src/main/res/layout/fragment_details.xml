@@ -136,6 +136,7 @@
             android:layout_height="wrap_content"
             android:text="@string/height"
             app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintHorizontal_bias="0.477"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/text_height" />
 
@@ -143,7 +144,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="44dp"
             android:text="@string/weight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_weight" />
@@ -255,6 +256,19 @@
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toEndOf="@+id/view_separator_stats"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+<!--        <SeekBar-->
+<!--            android:id="@+id/text_hp"-->
+<!--            android:layout_width="327dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:max="400"-->
+<!--            android:text="@string/stats_value"-->
+<!--            android:textSize="@dimen/text_size_stats"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.05"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/view_separator_stats"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
 
         <TextView
             android:id="@+id/text_atk"

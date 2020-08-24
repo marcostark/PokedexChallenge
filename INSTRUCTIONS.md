@@ -26,10 +26,10 @@ bem-vindos! =)
     [X] Tela com os detalhes do Pokémon ○ Nome e ID;
     -   Carrossel com as fotos disponíveis do Pokémon
     [X] View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
-    -   Exibir suas Habilidades (Run Away, Adaptability, Synchronize etc);
-    -   Ao tocar em uma habilidade, exibir um modal com a descrição;
-    -   Exibir seus tipos (electric, ground, water, fire etc);
-    -   Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo;
+    [X] Exibir suas Habilidades (Run Away, Adaptability, Synchronize etc);
+    [X] Ao tocar em uma habilidade, exibir um modal com a descrição;
+    [X] Exibir seus tipos (electric, ground, water, fire etc);
+    [X] Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo;
     -   Exibir a cadeia de evolução do Pokémon;
     -   Exibir spinner (combobox) que permita selecionar as variações do Pokémon (ao selecionar uma variação, o app deve carregar automaticamente os dados da variação selecionada);
 

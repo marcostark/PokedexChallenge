@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.marcosouza.pokedexchallenge.R
 import dev.marcosouza.pokedexchallenge.model.Pokemon
+import dev.marcosouza.pokedexchallenge.model.PokemonType
+import dev.marcosouza.pokedexchallenge.model.Type
 import dev.marcosouza.pokedexchallenge.ui.adapter.PokemonTypeAdapter
 import dev.marcosouza.pokedexchallenge.ui.details.DetailsViewModel
 import dev.marcosouza.pokedexchallenge.ui.details.state.DetailsStateEvent
@@ -49,7 +51,6 @@ class TypeListFragment : Fragment(),
             layoutManager = LinearLayoutManager(activity)
             pokemonTypeAdapter = PokemonTypeAdapter(ArrayList(), this@TypeListFragment)
             adapter = pokemonTypeAdapter
-
         }
     }
 
@@ -68,10 +69,14 @@ class TypeListFragment : Fragment(),
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             viewState.type?.let { type ->
-                println("DEBUG: Type: {${type.pokemons}}")
                 pokemonTypeAdapter.updateListPokemons(type.pokemons)
+                this.updateUi(type)
             }
         })
+    }
+
+    private fun updateUi(type: PokemonType){
+        activity?.title = "Type: ${type.nameType.capitalize()}"
     }
 
     private fun triggerGetPokemonsByType() {
@@ -90,5 +95,4 @@ class TypeListFragment : Fragment(),
     override fun onItemSelected(position: Int, item: Pokemon) {
         Toast.makeText(context, item.name, Toast.LENGTH_LONG).show()
     }
-
 }
