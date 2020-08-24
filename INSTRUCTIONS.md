@@ -19,41 +19,41 @@ bem-vindos! =)
 
 ### Requisitos Funcionais do App:
 
-Tela inicial com lista com todos os Pokémons
-    -   Busca por ID ou Nome utilizando o Search Dialog
-    -   Paginação utilizando Endless Scrolling
-    -   Foto default do Pokémon na listagem
-    -   Tela com os detalhes do Pokémon ○ Nome e ID;
+    [x] Tela inicial com lista com todos os Pokémons
+    [x] Busca por ID ou Nome utilizando o Search Dialog
+    [x] Paginação utilizando Endless Scrolling
+    [x] Foto default do Pokémon na listagem
+    [X] Tela com os detalhes do Pokémon ○ Nome e ID;
     -   Carrossel com as fotos disponíveis do Pokémon
-    -   View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
-    -   Exibir suas Habilidades (Run Away, Adaptability, Synchronize etc);
-    -   Ao tocar em uma habilidade, exibir um modal com a descrição;
-    -   Exibir seus tipos (electric, ground, water, fire etc);
-    -   Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo;
+    [X] View com os stats do Pokémon (hp, attack, defense, special attack, special defense, speed);
+    [X] Exibir suas Habilidades (Run Away, Adaptability, Synchronize etc);
+    [X] Ao tocar em uma habilidade, exibir um modal com a descrição;
+    [X] Exibir seus tipos (electric, ground, water, fire etc);
+    [X] Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo;
     -   Exibir a cadeia de evolução do Pokémon;
     -   Exibir spinner (combobox) que permita selecionar as variações do Pokémon (ao selecionar uma variação, o app deve carregar automaticamente os dados da variação selecionada);
 
 ### Requisitos Técnicos:
 
-    -   Desenvolva em Java ou Kotlin;
-    -   Utilizar alguma arquitetura de projeto (MVC, MVVM, Clean etc);
-    -   Utilizar Retrofit2 para realizar os request às API's;
-    -   Utilizar algum framework para o mapping do JSON (Jackson, GSON, Moshi etc);
-    -   Tratar erros nas chamadas;
-    -   Não utilizar nenhum wrapper para a Pokémon API;
+    [x] Desenvolva em Java ou Kotlin;
+    [x] Utilizar alguma arquitetura de projeto (MVC, MVVM, Clean etc);
+    [x] Utilizar Retrofit2 para realizar os request às API's;
+    [x] Utilizar algum framework para o mapping do JSON (Jackson, GSON, Moshi etc);
+    [x] Tratar erros nas chamadas;
+    [x] Não utilizar nenhum wrapper para a Pokémon API;
 
 
 ### Ganha mais pontos se:
 
     -   Testes unitários e instrumentados;
-    -   Utilizar RxJava ou Coroutines;
-    -   Utilizar Architecture Components ( Navigation, LiveData, Room, ViewModel etc);
+    [x] Utilizar RxJava ou Coroutines;
+    [x] Utilizar Architecture Components ( Navigation, LiveData, Room, ViewModel etc);
     -   Cache das imagens e dos requests para APIs;
     -   Utilizar shared element transitions;
-    -   Suportar mudanças de orientações das telas sem perder o estado;
+    [x] Suportar mudanças de orientações das telas sem perder o estado;
     -   Seguir as guidelines do Material Design;
     -   Conseguir as imagens dos posters e personagens de alguma API pública;
-    -   Construir layouts com Constraint Layout;
+    [x] Construir layouts com Constraint Layout;
     -   Trabalhar offline (cache dos dados);
     -   Utilizar algum framework de injeção de dependência (dagger, koin, kodein);
 
